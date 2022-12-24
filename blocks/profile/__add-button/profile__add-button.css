@@ -6,7 +6,6 @@
   border: 2px solid #fff;
   border-radius: 2px;
   display: flex;
-  font-size: 0;
   justify-content: center;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out;

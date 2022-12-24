@@ -17,5 +17,11 @@
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
-
+@import url(../blocks/photo-grid/photo-grid.css);
+@import url(../blocks/photo-grid/__item/photo-grid__item.css);
+@import url(../blocks/photo-grid/__image/photo-grid__image.css);
+@import url(../blocks/photo-grid/__item-description/photo-grid__item-description.css);
+@import url(../blocks/photo-grid/__item-name/photo-grid__item-name.css);
+@import url(../blocks/photo-grid/__like-button/photo-grid__like-button.css);
+@import url(../blocks/photo-grid/__like-button/_active/photo-grid__like-button_active.css);
 

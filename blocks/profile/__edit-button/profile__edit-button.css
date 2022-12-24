@@ -8,7 +8,6 @@
   grid-row-start: 1;
   grid-column-start: 2;
   align-self: center;
-  font-size: 0;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out;
 }
