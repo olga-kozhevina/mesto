@@ -10,7 +10,6 @@
   bottom: 0;
   right: 0;
   background: rgba(0, 0, 0, .5);
-  visibility: hidden;
+  display: none;
   transition: opacity .2s linear, visibility .2s linear;
-  opacity: 0
 }
