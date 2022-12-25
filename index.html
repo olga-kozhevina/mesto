@@ -10,14 +10,18 @@
   <meta name="author" content="Ольга Помыткина">
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
+  <script src="./index.js" defer></script>
+
 </head>
 
 <body class="page">
 
+  <!--header-->
   <header class="header">
     <img src="./images/logo.svg" alt="Логотип Место" class="header__logo">
   </header>
 
+  <!--main-->
   <main class="content">
     <section class="profile">
       <img src="./images/profile.svg" alt="Аватар профиля" class="profile__avatar">
@@ -77,9 +81,22 @@
     </section>
   </main>
 
+  <!--footer-->
   <footer class="footer">&copy; 2022 Mesto Russia</footer>
 
-  <script src="./index.js"></script>
+  <!--profile edit popup-->
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h3 class="popup__heading">Редактировать профиль</h3>
+      <form action="" class="popup__form" name="edit-profile">
+        <input type="text" class="popup__input" id="profile-name" name="profile-name" required minlength="1" maxlength="30" value="Жак-Ив Кусто" placeholder="Ваше Имя">
+        <input type="text" class="popup__input" id="profile-occupation" name="profile-occupation" required minlength="2" maxlength="200" value="Исследователь океана" placeholder="Ваше Вид Деятельности">
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
 </body>
 
 </html>

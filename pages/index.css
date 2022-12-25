@@ -25,26 +25,16 @@
 @import url(../blocks/photo-grid/__like-button/photo-grid__like-button.css);
 @import url(../blocks/photo-grid/__like-button/_active/photo-grid__like-button_active.css);
 
-.footer {
-  color: #545454;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  max-width: 100%;
-  margin: 48px 19px 36px;
-}
+@import url(../blocks/footer/footer.css);
 
-@media screen and (min-width: 600px) {
-  .footer {
-    font-size: 18px;
-    line-height: 22px;
-    margin: 67px 19 60px;
-  }
-}
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__heading/popup__heading.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__input/popup__input.css);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
+@import url(../blocks/popup/__save-button/popup__save-button.css);
 
-@media screen and (min-width: 1024px) {
-  .footer {
-    max-width: 880px;
-    margin: 67px auto 60px;
-  }
-}
+
+
+
