@@ -25,3 +25,26 @@
 @import url(../blocks/photo-grid/__like-button/photo-grid__like-button.css);
 @import url(../blocks/photo-grid/__like-button/_active/photo-grid__like-button_active.css);
 
+.footer {
+  color: #545454;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  max-width: 100%;
+  margin: 48px 19px 36px;
+}
+
+@media screen and (min-width: 600px) {
+  .footer {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 67px 19 60px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .footer {
+    max-width: 880px;
+    margin: 67px auto 60px;
+  }
+}
