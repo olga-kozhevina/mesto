@@ -11,13 +11,20 @@
   .footer {
     font-size: 18px;
     line-height: 22px;
-    margin: 67px 19 60px;
+    margin: 67px 19px 60px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .footer {
     max-width: 880px;
-    margin: 67px auto 60px;
+    margin-left: 70px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .footer {
+    max-width: 880px;
+    margin-left: 200px;
   }
 }

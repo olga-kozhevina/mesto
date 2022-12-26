@@ -4,7 +4,7 @@
   width: 20px;
   height: 20px;
   position: absolute;
-  bottom: 365px;
+  top: -36px;
   right: 0;
   cursor: pointer;
   transition: opacity .3s ease-in-out;
@@ -19,7 +19,7 @@
     background: url(../../../images/close-button_big.svg) center no-repeat;
     width: 32px;
     height: 32px;
-    bottom: 372px;
-    left: 387px;
+    top: -50px;
+    right: -30px;
   }
 }
