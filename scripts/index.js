@@ -1,5 +1,5 @@
 const openEditButton = document.querySelector('.profile__edit-button');
-const popupProfile = document.querySelector('.popup_type_profile');
+const popupProfile = document.querySelector('.popup');
 const closeEditButton = popupProfile.querySelector('.popup__close-button');
 
 openEditButton.addEventListener('click', editProfile);
