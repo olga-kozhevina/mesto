@@ -2,7 +2,7 @@
 
 // __редактирование профиля
 const openEditButton = document.querySelector('.profile__edit-button');
-const popupProfile = document.querySelector('.popup');
+const popupProfile = document.querySelector('.popup_type_edit-profile');
 const closeEditButton = popupProfile.querySelector('.popup__close-button');
 
 const formElement = document.querySelector('.popup__container');
@@ -74,7 +74,7 @@ function handleFormSubmit(event) {
   closePopup(popupProfile);
 }
 
-// Загружаем карточки с разметки (переменные и функции)
+// Загружаем 6 карточек из разметки (переменные и функции)
 
 const cardsContainer = document.querySelector('.photo-grid');
 const cardTemplate = document.querySelector('#photo-grid-template').content;
@@ -101,3 +101,33 @@ function renderCard({ name, link }) {
   }
 
 render();
+
+// Форма добавления карточки
+
+const openAddButton = document.querySelector('.profile__add-button');
+const popupAddCard = document.querySelector('.popup_type_add-card');
+const closeAddButton = popupAddCard.querySelector('.popup__close-button');
+
+const cardNameInput = document.querySelector('.popup__input_type_card-name');
+const cardSrcInput = document.querySelector('.popup__input_type_image-src');
+
+const cardName = document.querySelector('.card-name');
+const cardSrc = document.querySelector('.image-src');
+
+openAddButton.addEventListener('click', addCard);
+closeAddButton.addEventListener('click', () => {
+  closePopup(popupAddCard)
+});
+
+function addCard() {
+  openPopup(popupAddCard);
+  cardNameInput.value = cardName.textContent;
+  cardSrcInput.value = cardSrc.textContent;
+}
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+  cardName.textContent = cardNameInput.value;
+  cardSrc.textContent = cardSrcInput.value;
+  closePopup(popupAddCard);
+}
