@@ -67,18 +67,34 @@
     </li>
   </template>
 
-    <!--add-card popup-->
-    <div class="popup popup_type_add-card">
-      <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
-        <h3 class="popup__heading">Новое место</h3>
-        <form action="/" class="popup__form" name="edit-profile">
-          <input type="text" class="popup__input popup__input_type_card-name" id="card-name" name="card-name" required value="" placeholder="Название">
-          <input type="text" class="popup__input popup__input_type_image-src" id="image-src" name="image-src" required value="" placeholder="Ссылка на картинку">
-          <button class="popup__submit-button" type="submit">Создать</button>
-        </form>
-      </div>
+  <!-- add-card popup -->
+  <div class="popup popup_type_add-card">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h3 class="popup__heading">Новое место</h3>
+      <form action="/" class="popup__form" name="edit-profile">
+        <input type="text" class="popup__input popup__input_type_card-name" id="card-name" name="card-name" required value="" placeholder="Название">
+        <input type="url" class="popup__input popup__input_type_image-src" id="image-src" name="image-src" required value="" placeholder="Ссылка на картинку">
+        <button class="popup__submit-button" type="submit">Создать</button>
+      </form>
     </div>
+  </div>
+
+  <!-- card-zoom
+  <div class="popup popup_type_card-zoom">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <img alt="" class="photo-grid__image">
+      <h3 class="popup__heading">Новое место</h3>
+      <form action="/" class="popup__form" name="edit-profile">
+        <input type="text" class="popup__input popup__input_type_card-name" id="card-name" name="card-name" required value="" placeholder="Название">
+        <input type="text" class="popup__input popup__input_type_image-src" id="image-src" name="image-src" required value="" placeholder="Ссылка на картинку">
+        <button class="popup__submit-button" type="submit">Создать</button>
+      </form>
+    </div>
+  </div> -->
+
+
 
   <script defer src="./scripts/index.js"></script>
 </body>
