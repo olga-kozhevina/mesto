@@ -59,7 +59,7 @@
   <template id="photo-grid-template">
     <li class="photo-grid__item">
       <button class="photo-grid__delete-button" type="button"></button>
-      <img alt="" src="" class="photo-grid__image">
+      <img alt="" src="" class="photo-grid__image" id="photo-grid__image">
       <div class="photo-grid__item-description">
         <h2 class="photo-grid__item-name"></h2>
         <button class="photo-grid__like-button" type="button"></button>
@@ -80,23 +80,16 @@
     </div>
   </div>
 
-  <!-- card-zoom
-  <div class="popup popup_type_card-zoom">
+  <!-- card-zoom -->
+  <div class="popup popup_type_card-modal">
     <div class="popup__container">
       <button class="popup__close-button" type="button"></button>
-      <img alt="" class="photo-grid__image">
-      <h3 class="popup__heading">Новое место</h3>
-      <form action="/" class="popup__form" name="edit-profile">
-        <input type="text" class="popup__input popup__input_type_card-name" id="card-name" name="card-name" required value="" placeholder="Название">
-        <input type="text" class="popup__input popup__input_type_image-src" id="image-src" name="image-src" required value="" placeholder="Ссылка на картинку">
-        <button class="popup__submit-button" type="submit">Создать</button>
-      </form>
+      <img alt="" src="" class="popup__image">
+      <h3 class="popup__image-name"></h3>
     </div>
-  </div> -->
+  </div>
 
-
-
-  <script defer src="./scripts/index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>

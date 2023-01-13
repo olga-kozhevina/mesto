@@ -9,6 +9,13 @@
   box-sizing: border-box;
 }
 
+.popup_type_card-modal .popup__container {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  min-width: 240px;
+}
+
 @media screen and (min-width: 600px) {
   .popup__container {
     min-width: 430px;

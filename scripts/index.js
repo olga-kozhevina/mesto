@@ -41,7 +41,7 @@ function handleFormSubmit(event) {
 
 
 
-// Загружаем 6 карточек из разметки (переменные и функции)
+// Загружаем 6 карточек из разметки
 
 const initialCards = [
   {
@@ -58,7 +58,7 @@ const initialCards = [
   },
   {
     name: 'Кораллы',
-    link: 'https://images.unsplash.com/photo-1515555585025-54136276b6e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+    link: 'https://images.unsplash.com/photo-1520302659201-7ecf4ae863d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1772&q=80'
   },
   {
     name: 'Красная рыба',
@@ -70,6 +70,9 @@ const initialCards = [
   }
 ];
 
+
+// Создаем карточки (задаем переменные и функции открытия и закрытия)
+
 const openAddButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const closeAddButton = popupAddCard.querySelector('.popup__close-button');
@@ -77,6 +80,19 @@ const submitAddButton = document.querySelector('.popup__submit-button');
 
 const cardsContainer = document.querySelector('.photo-grid');
 const cardTemplate = document.querySelector('#photo-grid-template').content;
+
+openAddButton.addEventListener('click', () => { openPopup(popupAddCard); });
+closeAddButton.addEventListener('click', () => { closePopup(popupAddCard); });
+
+
+const zoomPopup = document.querySelector('.popup_type_card-modal');
+const zoomCloseButton = zoomPopup.querySelector('.popup__close-button');
+
+zoomCloseButton.addEventListener('click', () => {
+  closePopup(zoomPopup)
+});
+
+// Создание самой карточки
 
 function createCard(item) {
 
@@ -94,11 +110,23 @@ function createCard(item) {
 
   const cardDelete = cardItem.querySelector('.photo-grid__delete-button');
   cardDelete.addEventListener('click', function (event) {
-    event.target.parentElement.remove(); });
+    event.target.parentElement.remove();
+  });
+
+  const cardModal = cardItem.querySelector('.photo-grid__image');
+  const cardModalImage = document.querySelector('.popup__image');
+  const cardModalName = document.querySelector('.popup__image-name');
+
+  cardModal.addEventListener('click', handleFormCardModal);
+  function handleFormCardModal() {
+    openPopup(zoomPopup);
+    cardModalImage.src = cardImage.src;
+    cardModalImage.alt = cardImage.alt;
+    cardModalName.textContent = cardImage.alt;
+    }
 
   return cardItem;
 }
-
 
 function renderCards() {
   initialCards.forEach(function (item) {
@@ -107,22 +135,15 @@ function renderCards() {
   })
 } renderCards();
 
-
-openAddButton.addEventListener('click', () => { openPopup(popupAddCard); });
-closeAddButton.addEventListener('click', () => {
-  closePopup(popupAddCard)
-});
-
+// Форма отправки новой карточки
 
 const inputName = document.querySelector('.popup__input_type_card-name');
 const inputLink = document.querySelector('.popup__input_type_image-src');
 
-
 submitAddButton.addEventListener('click', handleFormSubmitCard);
 
-
 function handleFormSubmitCard(event) {
- event.preventDefault();
+  event.preventDefault();
 
   const inputs = {};
   inputs.name = inputName.value;
