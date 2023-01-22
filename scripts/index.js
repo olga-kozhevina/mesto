@@ -44,7 +44,8 @@ function handleFormSubmit(event) {
 const openAddButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const closeAddButton = popupAddCard.querySelector('.popup__close-button');
-const submitAddButton = document.querySelector('.popup__submit-button');
+
+const formModalCard = popupAddCard.querySelector('.popup__form');
 
 const cardsContainer = document.querySelector('.photo-grid');
 const cardTemplate = document.querySelector('#photo-grid-template').content;
@@ -105,7 +106,7 @@ function renderCards() {
 const inputName = document.querySelector('.popup__input_type_card-name');
 const inputLink = document.querySelector('.popup__input_type_image-src');
 
-submitAddButton.addEventListener('click', handleFormSubmitCard);
+formModalCard.addEventListener('submit', handleFormSubmitCard)
 
 function handleFormSubmitCard(event) {
   event.preventDefault();
@@ -121,3 +122,10 @@ function handleFormSubmitCard(event) {
   inputName.value = '';
   inputLink.value = '';
 }
+
+
+
+
+
+
+
