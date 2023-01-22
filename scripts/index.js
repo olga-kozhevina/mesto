@@ -26,10 +26,14 @@ function editProfile() {
 
 function openPopup(popupName) {
   popupName.classList.add('popup_opened');
+  document.addEventListener('mousedown', handleOverlayClick);
+  document.addEventListener('keydown', handleEscape);
 }
 
 function closePopup(popupName) {
   popupName.classList.remove('popup_opened');
+  document.removeEventListener('click', handleOverlayClick);
+  document.removeEventListener('keydown', handleEscape);
 }
 
 function handleFormSubmit(event) {
@@ -37,6 +41,24 @@ function handleFormSubmit(event) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupProfile);
+}
+
+// Закрытие попапов кликом на оверлей
+
+function handleOverlayClick(event) {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (openedPopup && event.target === openedPopup) {
+    closePopup(openedPopup);
+  }
+}
+
+// Закрытие попапов с помощью Escape
+
+function handleEscape(event) {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (openedPopup && event.key === 'Escape') {
+    closePopup(openedPopup);
+  }
 }
 
 // Создаем карточки (задаем переменные и функции открытия и закрытия)
