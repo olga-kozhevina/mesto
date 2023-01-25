@@ -55,8 +55,8 @@ function handleOverlayClick(event) {
 // Закрытие попапов с помощью Escape
 
 function handleEscape(event) {
-  const openedPopup = document.querySelector('.popup_opened');
   if (event.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }
@@ -66,7 +66,7 @@ function handleEscape(event) {
 const openAddButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const closeAddButton = popupAddCard.querySelector('.popup__close-button');
-const SubmitCardButton = popupAddCard.querySelector('.popup__submit-button');
+const submitCardButton = popupAddCard.querySelector('.popup__submit-button');
 
 
 const formModalCard = popupAddCard.querySelector('.popup__form');
@@ -143,7 +143,7 @@ function handleFormSubmitCard(event) {
   const newCard = createCard(inputs);
   cardsContainer.prepend(newCard);
 
-  formModalCard.reset();
-  SubmitCardButton.classList.add('popup__submit-button_disabled');
   closePopup(popupAddCard);
+  formModalCard.reset();
+  disableSubmitButton(submitCardButton, validationConfig);
 }
