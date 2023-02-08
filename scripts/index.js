@@ -1,57 +1,37 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+import {initialCards, formProfile, formCardModal, validationConfig, openEditButton, closeEditButton, openAddButton, closeAddButton, zoomCloseButton, popupProfile, nameInput, profileName, jobInput, profileJob, popupAddCard, zoomPopup, cardsContainer, inputName, inputLink} from './utils/constants.js';
+import {openPopup, closePopup} from './utils/functions.js';
 
-// Создание самой карточки
-
-function createCard(item) {
-  const card = new Card(item, '.photo-grid-template');
-  return card.generateCard();
-}
-
-// Редактирование профиля
+// Слушатели
 
 openEditButton.addEventListener('click', editProfile);
 closeEditButton.addEventListener('click', () => {
   closePopup(popupProfile)
 });
-
 formProfile.addEventListener('submit', handleFormSubmitProfile);
-
-function editProfile() {
-  openPopup(popupProfile);
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-}
-
-
-function handleFormSubmitProfile(event) {
-  event.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(popupProfile);
-}
-
-// Создаем карточки (задаем переменные и функции открытия и закрытия)
-
+formCardModal.addEventListener('submit', handleFormSubmitCard);
 openAddButton.addEventListener('click', () => { openPopup(popupAddCard); });
 closeAddButton.addEventListener('click', () => { closePopup(popupAddCard); });
-
-
-// Модальное окно карточки
-
 zoomCloseButton.addEventListener('click', () => {
   closePopup(zoomPopup)
 });
 
-function renderInitialCards() {
-  initialCards.forEach(function (item) {
-    const cardSrc = createCard(item);
-    cardsContainer.append(cardSrc);
-  })
-} renderInitialCards();
+// Проверка на валидацию
 
-// Форма отправки новой карточки
+const validateProfile = new FormValidator(validationConfig, formProfile);
+validateProfile.enableValidation();
+const validateCardModal = new FormValidator(validationConfig, formCardModal);
+validateCardModal.enableValidation();
 
-formModalCard.addEventListener('submit', handleFormSubmitCard)
+// Создание самой карточки
+
+function createCard(item) {
+  const card = new Card(item, '#photo-grid-template');
+  return card.generateCard();
+}
+
+// Форма добавления новой карточки
 
 function handleFormSubmitCard(event) {
   event.preventDefault();
@@ -64,7 +44,29 @@ function handleFormSubmitCard(event) {
   const newCard = createCard(inputs);
   cardsContainer.prepend(newCard);
 
+  formCardModal.reset();
+  validateCardModal.toggleButtonState();
   closePopup(popupAddCard);
-  formModalCard.reset();
-  disableSubmitButton(submitCardButton, validationConfig);
+}
+
+// Загрузка карточки в сетку
+
+  initialCards.forEach((item) => {
+    const cardSrc = createCard(item);
+    cardsContainer.append(cardSrc);
+  });
+
+// Редактирование профиля
+
+function editProfile() {
+  openPopup(popupProfile);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+}
+
+function handleFormSubmitProfile (event) {
+  event.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopup(popupProfile);
 }

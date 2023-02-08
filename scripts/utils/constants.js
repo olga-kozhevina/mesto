@@ -46,9 +46,7 @@ export const openAddButton = document.querySelector('.profile__add-button');
 export const popupAddCard = document.querySelector('.popup_type_add-card');
 export const closeAddButton = popupAddCard.querySelector('.popup__close-button');
 export const submitCardButton = popupAddCard.querySelector('.popup__submit-button');
-
-export const formModalCard = popupAddCard.querySelector('.popup__form');
-
+export const formCardModal = document.querySelector('#add-card');
 export const cardsContainer = document.querySelector('.photo-grid');
 export const cardTemplate = document.querySelector('#photo-grid-template').content;
 
@@ -64,7 +62,7 @@ export const cardModalName = document.querySelector('.popup__image-name');
 export const inputName = document.querySelector('.popup__input_type_card-name');
 export const inputLink = document.querySelector('.popup__input_type_image-src');
 
-// Константы конфигураций
+// Константы конфигураций валидатора
 
 export const validationConfig = {
   formSelector: '.popup__form',

@@ -15,7 +15,7 @@ class Card {
       .querySelector('.photo-grid__item')
       .cloneNode(true);
 
-      return cardElement;
+      this._element = cardElement;
   }
 
   _setEventListeners() {
@@ -46,7 +46,7 @@ class Card {
     this._setEventListeners();
     this._element.querySelector('.photo-grid__image').src = this._link;
     this._element.querySelector('.photo-grid__image').alt = this._name;
-    this._element.querySelector('.photo-grid__item-name').alt = this._name;
+    this._element.querySelector('.photo-grid__item-name').textContent = this._name;
 
     return this._element;
   }
