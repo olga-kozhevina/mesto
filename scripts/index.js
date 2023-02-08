@@ -1,15 +1,13 @@
+import Card from './Card.js';
+
+// Создание самой карточки
+
+function createCard(item) {
+  const card = new Card(item, '.photo-grid-template');
+  return card.generateCard();
+}
+
 // Редактирование профиля
-
-const openEditButton = document.querySelector('.profile__edit-button');
-const popupProfile = document.querySelector('.popup_type_edit-profile');
-const closeEditButton = popupProfile.querySelector('.popup__close-button');
-
-const formProfile = popupProfile.querySelector('.popup__form');
-const nameInput = formProfile.querySelector('.popup__input_type_name');
-const jobInput = formProfile.querySelector('.popup__input_type_occupation');
-
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__occupation');
 
 openEditButton.addEventListener('click', editProfile);
 closeEditButton.addEventListener('click', () => {
@@ -24,17 +22,6 @@ function editProfile() {
   jobInput.value = profileJob.textContent;
 }
 
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('mousedown', handleOverlayClick);
-  document.addEventListener('keydown', handleEscape);
-}
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('mousedown', handleOverlayClick);
-  document.removeEventListener('keydown', handleEscape);
-}
 
 function handleFormSubmitProfile(event) {
   event.preventDefault();
@@ -43,80 +30,17 @@ function handleFormSubmitProfile(event) {
   closePopup(popupProfile);
 }
 
-// Закрытие попапов кликом на оверлей
-
-function handleOverlayClick(event) {
-  const openedPopup = document.querySelector('.popup_opened');
-  if (event.target === openedPopup) {
-    closePopup(openedPopup);
-  }
-}
-
-// Закрытие попапов с помощью Escape
-
-function handleEscape(event) {
-  if (event.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-}
-
 // Создаем карточки (задаем переменные и функции открытия и закрытия)
-
-const openAddButton = document.querySelector('.profile__add-button');
-const popupAddCard = document.querySelector('.popup_type_add-card');
-const closeAddButton = popupAddCard.querySelector('.popup__close-button');
-const submitCardButton = popupAddCard.querySelector('.popup__submit-button');
-
-
-const formModalCard = popupAddCard.querySelector('.popup__form');
-
-const cardsContainer = document.querySelector('.photo-grid');
-const cardTemplate = document.querySelector('#photo-grid-template').content;
 
 openAddButton.addEventListener('click', () => { openPopup(popupAddCard); });
 closeAddButton.addEventListener('click', () => { closePopup(popupAddCard); });
 
 
-const zoomPopup = document.querySelector('.popup_type_card-modal');
-const zoomCloseButton = zoomPopup.querySelector('.popup__close-button');
-const cardModalImage = document.querySelector('.popup__image');
-const cardModalName = document.querySelector('.popup__image-name');
+// Модальное окно карточки
 
 zoomCloseButton.addEventListener('click', () => {
   closePopup(zoomPopup)
 });
-
-// Создание самой карточки
-
-function createCard(item) {
-
-  const cardItem = cardTemplate.querySelector('.photo-grid__item').cloneNode(true);
-  const cardImage = cardItem.querySelector('.photo-grid__image');
-  cardImage.src = item.link;
-  cardImage.alt = item.name;
-  const cardName = cardItem.querySelector('.photo-grid__item-name');
-  cardName.textContent = item.name;
-
-  const cardLike = cardItem.querySelector('.photo-grid__like-button');
-  cardLike.addEventListener('click', function (event) {
-    event.target.classList.toggle('photo-grid__like-button_active');
-  });
-
-  const cardDelete = cardItem.querySelector('.photo-grid__delete-button');
-  cardDelete.addEventListener('click', function () {
-    cardItem.remove();
-  });
-
-  cardImage.addEventListener('click', function () {
-    openPopup(zoomPopup);
-    cardModalImage.src = cardImage.src;
-    cardModalImage.alt = cardImage.alt;
-    cardModalName.textContent = cardImage.alt;
-  });
-
-  return cardItem;
-}
 
 function renderInitialCards() {
   initialCards.forEach(function (item) {
@@ -126,9 +50,6 @@ function renderInitialCards() {
 } renderInitialCards();
 
 // Форма отправки новой карточки
-
-const inputName = document.querySelector('.popup__input_type_card-name');
-const inputLink = document.querySelector('.popup__input_type_image-src');
 
 formModalCard.addEventListener('submit', handleFormSubmitCard)
 
