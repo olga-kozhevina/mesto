@@ -33,7 +33,7 @@ closeButtons.forEach((button) => {
 // Создание самой карточки
 
 function createCard(item) {
-  const card = new Card(item, handleCardClick);
+  const card = new Card(item, '#photo-grid-template', handleCardClick);
   return card.generateCard();
 }
 

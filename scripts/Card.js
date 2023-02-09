@@ -1,14 +1,15 @@
 class Card {
-  constructor(data, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
+    this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._element = this._getCardTemplate();
   }
 
   _getCardTemplate() {
     const cardElement = document
-      .querySelector('#photo-grid-template')
+      .querySelector(this._cardSelector)
       .content
       .querySelector('.photo-grid__item')
       .cloneNode(true);
