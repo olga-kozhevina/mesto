@@ -27,11 +27,14 @@ export const initialCards = [
   }
 ];
 
+// Обработчик для закрытия попапа по нажатию на крестик
+
+export const closeButtons = document.querySelectorAll('.popup__close-button');
+
 // Редактирование профиля
 
 export const popupProfile = document.querySelector('.popup_type_edit-profile');
 export const openEditButton = document.querySelector('.profile__edit-button');
-export const closeEditButton = popupProfile.querySelector('.popup__close-button');
 
 export const formProfile = popupProfile.querySelector('.popup__form');
 export const nameInput = formProfile.querySelector('.popup__input_type_name');
@@ -44,7 +47,6 @@ export const profileJob = document.querySelector('.profile__occupation');
 
 export const openAddButton = document.querySelector('.profile__add-button');
 export const popupAddCard = document.querySelector('.popup_type_add-card');
-export const closeAddButton = popupAddCard.querySelector('.popup__close-button');
 export const submitCardButton = popupAddCard.querySelector('.popup__submit-button');
 export const formCardModal = document.querySelector('#add-card');
 export const cardsContainer = document.querySelector('.photo-grid');
@@ -53,7 +55,6 @@ export const cardTemplate = document.querySelector('#photo-grid-template').conte
 // Модальное окно карточки
 
 export const zoomPopup = document.querySelector('.popup_type_card-modal');
-export const zoomCloseButton = zoomPopup.querySelector('.popup__close-button');
 export const cardModalImage = document.querySelector('.popup__image');
 export const cardModalName = document.querySelector('.popup__image-name');
 

@@ -22,7 +22,7 @@ class FormValidator {
 
   /* скрыть ошибку в полях ввода */
 
-  hideInputError = (inputElement) => {
+  _hideInputError = (inputElement) => {
     const _errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     _errorElement.classList.remove(this._errorClass);
@@ -47,7 +47,7 @@ class FormValidator {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this.hideInputError(inputElement);
+      this._hideInputError(inputElement);
     }
   };
 
@@ -61,6 +61,15 @@ class FormValidator {
     }
   };
 
+  /* функция очистки ошибок и управления кнопкой */
+
+   resetValidation() {
+      this.toggleButtonState();
+      this._inputList.forEach((inputElement) => {
+        this._hideInputError(inputElement);
+      });
+    }
+
   /* проверка полей на валидацию */
 
   _hasInvalidInput() {
@@ -72,17 +81,13 @@ class FormValidator {
   /* вспомогательные функции по (де)активации кнопок */
 
   _disableSubmitButton() {
-    const _buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-
-    _buttonElement.classList.add(this._inactiveButtonClass);
-    _buttonElement.disabled = true;
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.disabled = true;
   };
 
   _enableSubmitButton() {
-    const _buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-
-    _buttonElement.classList.remove(this._inactiveButtonClass);
-    _buttonElement.disabled = false;
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.disabled = false;
   };
 
   /* основная функция проверки на валидацию полей */
