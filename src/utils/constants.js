@@ -27,6 +27,7 @@ export const initialCards = [
   }
 ];
 
+
 // Обработчик для закрытия попапа по нажатию на крестик
 
 export const closeButtons = document.querySelectorAll('.popup__close-button');
