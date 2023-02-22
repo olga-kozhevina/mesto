@@ -40,21 +40,18 @@ editProfilePopup.setEventListeners();
 const zoomImagePopup = new PopupWithImage(zoomPopup);
 zoomImagePopup.setEventListeners();
 
-
 // Добавляем слушатели для открытия попапов
 openAddButton.addEventListener('click', () => {
   addCardPopup.open();
   validateCardModal.resetValidation();
-  addCardPopup.reset();
 });
 
 openEditButton.addEventListener('click', () => {
   const { name, occupation } = userInfo.getUserInfo();
-  nameInput.value = name;
-  jobInput.value = occupation;
+  editProfilePopup.setInputValues({ 'profile-name': name, 'profile-occupation': occupation });
   validateProfile.resetValidation();
   editProfilePopup.open();
-});
+  });
 
 // Редактирование профиля
 const userInfo = new UserInfo({
@@ -76,31 +73,25 @@ const cardList = new Section({
     cardList.addItem(card);
   }
 }, cardsContainer);
-
 cardList.renderedItems();
 
 // Назначаем обработчики отправки формы
-function handleFormSubmitCard() {
-  const inputs = {
-    name: inputName.value,
-    link: inputLink.value
-  };
-
-  const newCard = createCard(inputs);
+function handleFormSubmitCard(inputs) {
+  const newCard = createCard({
+    name: inputs['card-name'],
+    link: inputs['url']
+  });
   cardList.addItem(newCard);
-
-  // Очищаем форму и отключаем кнопку отправки
   addCardPopup.close();
-  addCardPopup.reset();
   validateCardModal.toggleButtonState();
 }
 
-function handleFormSubmitProfile() {
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
+function handleFormSubmitProfile(inputs) {
+  const { 'profile-name': name, 'profile-occupation': occupation } = inputs;
+  userInfo.setUserInfo({name, occupation});
   editProfilePopup.close();
 }
 
 function handleCardClick(name, link) {
-  zoomImagePopup.open({ name: name, link: link });
+  zoomImagePopup.open({ name: name, link: link});
 }

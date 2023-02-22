@@ -13,9 +13,4 @@ export default class PopupWithImage extends Popup {
     this._popupImage.alt = data.name;
     super.open();
   }
-
-  setEventListeners() {
-    super.setEventListeners();
-    this._popup.addEventListener('click', this._handleOverlayClick);
-  }
 }
