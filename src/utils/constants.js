@@ -32,6 +32,14 @@ export const initialCards = [
 
 export const closeButtons = document.querySelectorAll('.popup__close-button');
 
+// Аватар
+
+export const profileAvatar = document.querySelector('.profile__avatar');
+
+// Серверная ошибка
+
+export const errorMessage = document.querySelector('#error-message');
+
 // Редактирование профиля
 
 export const popupProfile = document.querySelector('.popup_type_edit-profile');

@@ -17,6 +17,8 @@ import {
   inputName,
   inputLink,
   zoomPopup,
+  profileAvatar,
+  errorMessage
 } from '../utils/constants.js';
 
 import FormValidator from '../components/FormValidator';
@@ -25,6 +27,7 @@ import PopupWithImage from '../components/PopupWithImage';
 import Card from '../components/Card';
 import UserInfo from '../components/UserInfo';
 import Section from '../components/Section';
+import api from '../components/Api';
 
 // Проверка на валидацию
 const validateProfile = new FormValidator(validationConfig, formProfile);
@@ -95,3 +98,16 @@ function handleFormSubmitProfile(inputs) {
 function handleCardClick(name, link) {
   zoomImagePopup.open({ name: name, link: link});
 }
+
+// Запросы на сервер
+
+api.getUserInfo()
+.then(user => {
+  nameInput.textContent = user.name;
+  jobInput.textContent = user.about;
+  profileAvatar.src = user.avatar;
+})
+.catch(err => {
+  console.log(`Ошибка при получении информации о пользователе: ${err}`);
+  errorMessage.textContent = 'Произошла ошибка при получении информации о пользователе';
+});
