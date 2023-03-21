@@ -5,4 +5,11 @@
   object-position: center;
   object-fit: cover;
   flex: 0 0 120px;
+  transition: opacity .3s ease-in-out;
 }
+
+.profile__avatar:hover {
+  opacity: .3;
+  cursor: pointer;
+}
+
