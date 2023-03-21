@@ -34,20 +34,20 @@ const validateAvatar = new FormValidator(validationConfig, formAvatar);
 validateAvatar.enableValidation();
 
 //  2) Создаем экземпляры классов
-const addCardPopup = new PopupWithForm('.popup_type_add-card', handleFormSubmitCard);
-addCardPopup.setEventListeners();
+const cardPopup = new PopupWithForm('.popup_type_add-card', handleFormSubmitCard);
+cardPopup.setEventListeners();
 
-const editProfilePopup = new PopupWithForm('.popup_type_edit-profile', handleFormSubmitProfile);
-editProfilePopup.setEventListeners();
+const profilePopup = new PopupWithForm('.popup_type_edit-profile', handleFormSubmitProfile);
+profilePopup.setEventListeners();
 
-const updateAvatarPopup = new PopupWithForm('.popup_type_avatar', handleFormSubmitAvatar);
-updateAvatarPopup.setEventListeners();
+const avatarPopup = new PopupWithForm('.popup_type_avatar', handleFormSubmitAvatar);
+avatarPopup.setEventListeners();
 
-const zoomImagePopup = new PopupWithImage('.popup_type_card-modal');
-zoomImagePopup.setEventListeners();
+const imagePopup = new PopupWithImage('.popup_type_card-modal');
+imagePopup.setEventListeners();
 
-const confirmDeletePopup = new PopupWithConfirm('.popup_type_confirm');
-confirmDeletePopup.setEventListeners();
+const confirmationPopup = new PopupWithConfirm('.popup_type_confirm');
+confirmationPopup.setEventListeners();
 
 // - загрузка карточек с сервера в сетку
 const cardsList = new Section({
@@ -62,20 +62,20 @@ const api = new Api(options, userInfo);
 
 // 3) Добавляем слушатели открытия попапов
 openAddButton.addEventListener('click', () => {
-  addCardPopup.open();
+  cardPopup.open();
   validateCardModal.resetValidation();
 });
 
 openEditButton.addEventListener('click', () => {
   validateProfile.resetValidation();
-  editProfilePopup.open();
+  profilePopup.open();
   validateProfile.toggleButtonState();
   fillProfileInfo();
 });
 
 avatarContainer.addEventListener('click', () => {
   validateAvatar.resetValidation();
-  updateAvatarPopup.open();
+  avatarPopup.open();
 })
 
 // 4) Заполнить информацию профиля
@@ -129,11 +129,11 @@ function createCard(cardData) {
 
     onDelete: (currentData, handleCardDelete) => {
       console.log(currentData._id);
-      confirmDeletePopup.open();
-      confirmDeletePopup.setConfirmation(() => {
+      confirmationPopup.open();
+      confirmationPopup.setConfirmation(() => {
         api.deleteCard(currentData._id)
           .then(() => {
-            confirmDeletePopup.close();
+            confirmationPopup.close();
             handleCardDelete();
           })
           .catch((err) => {
@@ -148,54 +148,54 @@ function createCard(cardData) {
 
 // 7) Функция открытия попапа с увеличенным изображения
 function handleCardClick(name, link) {
-  zoomImagePopup.open(name, link);
+  imagePopup.open(name, link);
 }
 
 // 8) Назначаем обработчики отправки формы
 function handleFormSubmitCard({name, link}) {
-  addCardPopup.showSaving();
+  cardPopup.showSaving();
   api.addCard({
     name: name, link: link
   })
   .then((data) => {
     cardsList.addItem(createCard(data));
-    addCardPopup.close();
+    cardPopup.close();
   })
   .catch(err => {
     console.log(`Ошибка при добавлении карточки: ${err}`);
     errorMessage.textContent = 'Произошла ошибка при добавлении карточки';
   })
-  .finally(() => addCardPopup.removeSaving())
+  .finally(() => cardPopup.removeSaving())
 }
 
 function handleFormSubmitProfile({name, about}) {
-  editProfilePopup.showSaving();
+  profilePopup.showSaving();
   api.editUserInfo({
     name: name,
     about: about
   })
   .then((res) => {
     userInfo.setUserInfo(res);
-    editProfilePopup.close();
+    profilePopup.close();
   })
   .catch(err => {
     console.log(`Ошибка отправки формы: ${err}`);
     errorMessage.textContent = 'Произошла ошибка отправки формы';
   })
-  .finally(() => editProfilePopup.removeSaving())
+  .finally(() => profilePopup.removeSaving())
 };
 
 function handleFormSubmitAvatar() {
   const avatarUrl = avatarInput.value;
-  updateAvatarPopup.showSaving();
+  avatarPopup.showSaving();
   api.updateProfileAvatar(avatarUrl)
   .then((data) => {
     userInfo.setUserAvatar(data);
-    updateAvatarPopup.close();
+    avatarPopup.close();
   })
   .catch((err) => {
     console.log(`Ошибка отправки формы: ${err}`);
     errorMessage.textContent = 'Произошла ошибка отправки формы';
   })
-  .finally(() =>  updateAvatarPopup.removeSaving());
+  .finally(() =>  avatarPopup.removeSaving());
 }
