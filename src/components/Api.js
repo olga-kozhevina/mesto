@@ -1,28 +1,81 @@
 class Api {
-  constructor(options) {
+  constructor(options, userInfo) {
     this._baseUrl = options.baseUrl,
-    this._headers = {
-      authorization: options.token,
-      'Content-Type': 'application/json'
-    };
+    this._headers = options.headers;
+    this._userInfo = userInfo;
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+      .then(this._handleResponse);
   }
-}
 
-const api = new Api({
-  baseUrl: 'https://nomoreparties.co/v1/cohort-61',
-  token: '52fc6959-8692-45e7-a047-982dcb1b275b'
-});
+  _handleResponse(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  }
 
-export default api;
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers
+    })
+      .then(this._handleResponse);
+  }
+
+  editUserInfo({ name, about }) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({ name, about })
+    })
+      .then(this._handleResponse);
+  }
+
+  addCard({ name, link }) {
+    console.log({name, link});
+
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({ name, link })
+    })
+    .then(this._handleResponse);
+  }
+
+  putLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+    .then(this._handleResponse);
+  }
+
+  deleteLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(this._handleResponse);
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(this._handleResponse);
+  }
+
+  updateProfileAvatar(avatarUrl) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({avatar: avatarUrl})
+    })
+    .then(this._handleResponse);
+    }
+  }
+
+
+export default Api;

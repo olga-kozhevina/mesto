@@ -21,10 +21,12 @@
   <!--main-->
   <main class="content">
     <section class="profile">
-      <img src="<%=require('./images/profile.svg')%>" alt="Аватар профиля" class="profile__avatar">
+      <div class="profile__avatar-container">
+        <img src="<%=require('./images/profile.svg')%>" alt="Аватар профиля" class="profile__avatar" name="avatar">
+      </div>
       <div class="profile__info">
-        <h1 class="profile__name" name="name" >Жак-Ив Кусто</h1>
-        <p class="profile__occupation" name="occupation" >Исследователь океана</p>
+        <h1 class="profile__name" name="profile-name">Жак-Ив Кусто</h1>
+        <p class="profile__about" name="profile-about">Исследователь океана</p>
         <button class="profile__edit-button" type="button"></button>
       </div>
       <button class="profile__add-button" type="button"></button>
@@ -50,10 +52,10 @@
       <button class="popup__close-button" type="button"></button>
       <h3 class="popup__heading">Редактировать профиль</h3>
       <form action="/" class="popup__form" name="edit-profile" id="edit-profile" novalidate>
-        <input type="text" class="popup__input popup__input_type_name" id="profile-name" name="profile-name" required minlength=2 maxlength=40 value="Жак-Ив Кусто" placeholder="Имя">
+        <input type="text" class="popup__input popup__input_type_name" id="profile-name" name="name" required minlength=2 maxlength=40 value="Жак-Ив Кусто" placeholder="Имя">
         <span class="popup__error profile-name-error"></span>
-        <input type="text" class="popup__input popup__input_type_occupation" id="profile-occupation" name="profile-occupation" required value="Исследователь океана" minlength=2 maxlength=200 placeholder="О себе">
-        <span class="popup__error profile-occupation-error"></span>
+        <input type="text" class="popup__input popup__input_type_about" id="profile-about" name="about" required value="Исследователь океана" minlength=2 maxlength=200 placeholder="О себе">
+        <span class="popup__error profile-about-error"></span>
         <button class="popup__submit-button" type="submit">Сохранить</button>
       </form>
     </div>
@@ -65,11 +67,35 @@
       <button class="popup__close-button" type="button"></button>
       <h3 class="popup__heading">Новое место</h3>
       <form action="/" class="popup__form" name="add-card" id="add-card" novalidate>
-        <input type="text" class="popup__input popup__input_type_card-name" id="card-name" name="card-name" required minlength=2 maxlength=30 placeholder="Название">
+        <input type="text" class="popup__input popup__input_type_card-name" id="card-name" name="name" required minlength=2 maxlength=30 placeholder="Название">
         <span class="popup__error card-name-error"></span>
-        <input type="url" class="popup__input popup__input_type_image-src" id="url" name="url" placeholder="Ссылка на картинку" required>
+        <input type="url" class="popup__input popup__input_type_image-src" id="url" name="link" placeholder="Ссылка на картинку" required>
         <span class="popup__error url-error"></span>
         <button class="popup__submit-button" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- confirm popup -->
+  <div class="popup popup_type_confirm">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h3 class="popup__heading">Вы уверены?</h3>
+      <form action="/" class="popup__form" name="confirm" id="confirm" novalidate>
+        <button class="popup__submit-button" type="submit">Да</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- update avatar popup -->
+  <div class="popup popup_type_avatar">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h3 class="popup__heading">Обновить аватар</h3>
+      <form action="/" class="popup__form" name="avatar" id="avatar" novalidate>
+        <input type="url" class="popup__input popup__input_type_avatar" id="url" name="url" placeholder="Ссылка на картинку" required>
+        <span class="popup__error url-error"></span>
+        <button class="popup__submit-button" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
@@ -85,12 +111,15 @@
 
   <!-- photo-grid-template -->
   <template id="photo-grid-template">
-    <li class="photo-grid__item">
+    <li class="photo-grid__item card-element">
       <button class="photo-grid__delete-button" type="button"></button>
       <img alt="" src="<%=require('./images/logo.svg')%>" class="photo-grid__image" id="photo-grid__image">
       <div class="photo-grid__item-description">
         <h2 class="photo-grid__item-name"></h2>
-        <button class="photo-grid__like-button" type="button"></button>
+        <div class="photo-grid__like">
+          <button class="photo-grid__like-button" type="button"></button>
+          <div class="photo-grid__like-count"></div>
+        </div>
       </div>
     </li>
   </template>
