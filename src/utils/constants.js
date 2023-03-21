@@ -1,5 +1,5 @@
 // Аватар
-export const formAvatar = document.querySelector('.popup__form');
+export const formAvatar = document.querySelector('.popup__form-avatar');
 export const avatarContainer = document.querySelector('.profile__avatar-container');
 export const avatarInput = document.querySelector('.popup__input_type_avatar');
 
