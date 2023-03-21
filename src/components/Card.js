@@ -28,7 +28,7 @@ class Card {
 
     const cardIsLiked = 'photo-grid__like-button_active';
 
-    if (!this._cardOwner()) {
+ if (!this._cardOwner()) {
       this._deleteButton.remove();
     }
 
@@ -36,7 +36,9 @@ class Card {
       this._likeButton.classList.add(cardIsLiked);
     } else {
       this._likeButton.classList.remove(cardIsLiked);
-    }
+    };
+
+    this._likeCount.textContent = this._cardData.likes.length;
 
     this._setEventListeners();
   }
@@ -60,7 +62,14 @@ class Card {
   }
 
   toggleCardLike() {
-    this.isLiked() ? this._likeButton.classList.add('photo-grid__like-button_active') : this._likeButton.classList.remove('photo-grid__like-button_active');
+    const cardIsLiked = 'photo-grid__like-button_active';
+
+    if (this.isLiked()) {
+      this._likeButton.classList.add(cardIsLiked);
+    } else {
+      this._likeButton.classList.remove(cardIsLiked);
+    }
+    this._likeCount.textContent = this._cardData.likes.length;
   }
 
   isLiked() {
@@ -82,7 +91,6 @@ class Card {
     this._handleCardLike(this._cardData, (updateLike) => {
       this._cardData.likes = updateLike;
       this.toggleCardLike();
-      this._likeCount.textContent = this._cardData.likes.length;
     });
   }
 

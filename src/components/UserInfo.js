@@ -10,11 +10,10 @@ export default class UserInfo {
     return this._data;
   }
 
-  setUserInfo({name, about}) {
-    this._data.name = name;
-    this._data.about = about;
-    this._name.textContent = name;
-    this._occupation.textContent = about;
+  setUserInfo(data) {
+    this._data = data;
+    this._name.textContent = data.name;
+    this._occupation.textContent = data.about;
 
   }
 

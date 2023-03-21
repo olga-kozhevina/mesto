@@ -12,7 +12,6 @@ class FormValidator {
   }
 
   /* показать ошибку в полях ввода */
-
   _showInputError = (inputElement, errorMessage) => {
     const _errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
@@ -21,7 +20,6 @@ class FormValidator {
   };
 
   /* скрыть ошибку в полях ввода */
-
   _hideInputError = (inputElement) => {
     const _errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
@@ -30,7 +28,6 @@ class FormValidator {
   };
 
   /* установить слушатели */
-
   _setEventListeners() {
     this.toggleButtonState();
     this._inputList.forEach((inputElement) => {
@@ -42,7 +39,6 @@ class FormValidator {
   };
 
   /* проверка на валидность полей */
-
   _checkInputValidity = (inputElement) => {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
@@ -52,7 +48,6 @@ class FormValidator {
   };
 
   /* функция на (де)активацию кнопок */
-
   toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {
       this._disableSubmitButton(this._buttonElement);
@@ -62,7 +57,6 @@ class FormValidator {
   };
 
   /* функция очистки ошибок и управления кнопкой */
-
    resetValidation() {
       this.toggleButtonState();
       this._inputList.forEach((inputElement) => {
@@ -71,7 +65,6 @@ class FormValidator {
     }
 
   /* проверка полей на валидацию */
-
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
@@ -79,7 +72,6 @@ class FormValidator {
   };
 
   /* вспомогательные функции по (де)активации кнопок */
-
   _disableSubmitButton() {
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.disabled = true;
@@ -91,7 +83,6 @@ class FormValidator {
   };
 
   /* основная функция проверки на валидацию полей */
-
   enableValidation() {
     this._formElement.addEventListener('submit', (event) => {
       event.preventDefault();

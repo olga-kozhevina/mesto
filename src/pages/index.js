@@ -6,20 +6,10 @@ import {
   validationConfig,
   openEditButton,
   openAddButton,
-  popupProfile,
-  profileName,
-  profileJob,
   nameInput,
   jobInput,
-  popupAddCard,
-  cardsContainer,
-  zoomPopup,
-  profileAvatar,
   errorMessage,
-  cardTemplate,
   options,
-  popupUpdateAvatar,
-  popupConfirm,
   avatarContainer,
   formAvatar,
   userProfile,
@@ -34,7 +24,6 @@ import Card from '../components/Card.js';
 import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
 import Api from '../components/Api.js';
-//import { validate } from 'webpack';
 
 // 1) Проверка на валидацию
 const validateProfile = new FormValidator(validationConfig, formProfile);
@@ -89,23 +78,37 @@ avatarContainer.addEventListener('click', () => {
   updateAvatarPopup.open();
 })
 
+// 4) Заполнить информацию профиля
 userInfo.setUserInfo({
   name: nameInput.value,
   about: jobInput.value
 });
 
-// 4) Заполнить информацию профиля
 function fillProfileInfo() {
   const profileInfo = userInfo.getUserInfo();
   nameInput.value = profileInfo.name;
   jobInput.value = profileInfo.about;
 };
 
-// 5) Создание самой карточки
+// 5) Запрашиваем с сервера информацию о юзере и карточках
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([user, cards]) => {
+    userInfo.setUserInfo(user);
+    userInfo.setUserAvatar(user);
+    cardsList.renderedItems(cards.slice().reverse());
+  })
+  .catch((err) => {
+    console.log(`Ошибка при получении данных: ${err}`);
+    errorMessage.textContent = 'Произошла ошибка при получении данных';
+  })
+
+// 6) Создание самой карточки
 function createCard(cardData) {
   cardData.currentUser = userInfo.getUserInfo();
+
   const card = new Card( cardData, '#photo-grid-template', {
     onClick: handleCardClick,
+
     onLike: (currentData, handleCardLike) => {
       if (card.isLiked()) {
         api.deleteLike(currentData._id)
@@ -123,7 +126,9 @@ function createCard(cardData) {
           })
       }
     },
+
     onDelete: (currentData, handleCardDelete) => {
+      console.log(currentData._id);
       confirmDeletePopup.open();
       confirmDeletePopup.setConfirmation(() => {
         api.deleteCard(currentData._id)
@@ -138,21 +143,8 @@ function createCard(cardData) {
       });
     }
   });
-
   return card.generateCard();
 }
-
-// 6) Запрашиваем с сервера информацию о юзере и карточках
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([user, cards]) => {
-    userInfo.setUserInfo(user);
-    userInfo.setUserAvatar(user);
-    cardsList.renderedItems(cards.slice().reverse());
-  })
-  .catch((err) => {
-    console.log(`Ошибка при получении данных: ${err}`);
-    errorMessage.textContent = 'Произошла ошибка при получении данных';
-  })
 
 // 7) Функция открытия попапа с увеличенным изображения
 function handleCardClick(name, link) {
@@ -161,7 +153,6 @@ function handleCardClick(name, link) {
 
 // 8) Назначаем обработчики отправки формы
 function handleFormSubmitCard({name, link}) {
-  console.log({name, link});
   addCardPopup.showSaving();
   api.addCard({
     name: name, link: link

@@ -57,8 +57,8 @@ class Api {
     .then(this._handleResponse);
   }
 
-  deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
       headers: this._headers
     })
@@ -74,6 +74,5 @@ class Api {
     .then(this._handleResponse);
     }
   }
-
 
 export default Api;
